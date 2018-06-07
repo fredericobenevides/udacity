@@ -55,6 +55,14 @@ input("Press Enter to continue...")
 
 
 def column_to_list(data, index):
+    """
+    Transform all the columns to a list
+    Args:
+       data: The data to read the columns using the index.
+       index: the index of the column to transform to list.
+    Returns:
+        The column at the specific index as a list
+    """
     column_list = []
     # Tip: You can use a for to iterate over the samples, get the feature by index and append into a list
     for d in data:
@@ -107,6 +115,13 @@ input("Press Enter to continue...")
 
 
 def count_gender(data_list):
+    """
+    Count how many genders exist in data_list
+    Args:
+       data_list: Containing the genders Male and Female to count how many exist it.
+    Returns:
+        A tuple of (count of Male, count of Female) found in data_list
+    """
     male = 0
     female = 0
 
@@ -140,6 +155,13 @@ input("Press Enter to continue...")
 
 
 def most_popular_gender(data_list):
+    """
+    Found which gender is the most popular
+    Args:
+       data_list: Containing all the genders to found out  which is the most popular
+    Returns:
+        A String containing Male, Female to indicate which one is the most popular. Otherwise return Equal.
+    """
     answer = ""
 
     male, female = count_gender(data_list)
@@ -182,6 +204,13 @@ print("\nTASK 7: Check the chart!")
 
 
 def count_user_types(data_list):
+    """
+    Count how many user type exist in data_list
+    Args:
+       data_list: Containing the user types of Subscriber and Customer to count it.
+    Returns:
+        A tuple of (count of Subscriber, count of Customer) found in data_list
+    """
     list_user_types = column_to_list(data_list, -3)
 
     subscriber = 0
@@ -232,6 +261,13 @@ median_trip = 0.
 
 
 def find_min(trip_duration_list):
+    """
+    Find the minimum value of the trip
+    Args:
+       trip_duration_list: To find the mininum of the trip.
+    Returns:
+        The minimum value of the trip
+    """
     min = 9999
     for dl in trip_duration_list:
         dl_as_int = int(dl)
@@ -242,6 +278,13 @@ def find_min(trip_duration_list):
 
 
 def find_max(trip_duration_list):
+    """
+    Find the maximum value of the trip
+    Args:
+       trip_duration_list: To find the maximum of the trip.
+    Returns:
+        The maximum value of the trip
+    """
     max = 0
     for dl in trip_duration_list:
         dl_as_int = int(dl)
@@ -252,6 +295,13 @@ def find_max(trip_duration_list):
 
 
 def find_mean(trip_duration_list):
+    """
+    Find the mean value of the trip
+    Args:
+       trip_duration_list: To find the mean of the trip.
+    Returns:
+        The mean value of the trip
+    """
     count = 0
     total = 0
 
@@ -263,6 +313,13 @@ def find_mean(trip_duration_list):
 
 
 def find_median(trip_duration_list):
+    """
+    Find the median value of the trip
+    Args:
+       trip_duration_list: To find the median of the trip.
+    Returns:
+        The median value of the trip
+    """
     trip_sorted_list = list(map(float, trip_duration_list))  # .sort()
     trip_sorted_list.sort()
 
@@ -331,12 +388,33 @@ input("Press Enter to continue...")
 # TODO: Create a function to count user types without hardcoding the types
 # so we can use this function with a different kind of data.
 print("Will you face it?")
-answer = "no"
+answer = "yes"
 
 
 def count_items(column_list):
+    """
+    Generic function to count how many items exists in the list.
+    Args:
+        column_list: To calculate how many items exist it.
+    Returns:
+        The tuple of (item_types, count_items) containing the items and their count.
+    """
     item_types = []
     count_items = []
+
+    dict_items = {}
+
+    for i in column_list:
+        item = dict_items.get(i)
+        if item is None:
+            dict_items[i] = 1
+        else:
+            dict_items[i] += 1
+
+    for key, value in dict_items.items():
+        item_types.append(key)
+        count_items.append(value)
+
     return item_types, count_items
 
 
