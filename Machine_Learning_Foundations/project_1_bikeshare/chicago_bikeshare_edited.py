@@ -180,13 +180,39 @@ input("Press Enter to continue...")
 # TODO: Plot a similar graph for user_types. Make sure the legend is correct.
 print("\nTASK 7: Check the chart!")
 
+
+def count_user_types(data_list):
+    list_user_types = column_to_list(data_list, -3)
+
+    subscriber = 0
+    customer = 0
+
+    for ut in list_user_types:
+        if ut == 'Subscriber':
+            subscriber += 1
+        else:
+            customer += 1
+
+    return subscriber, customer
+
+
+types = ['Subscriber', 'Customer']
+quantity = count_user_types(data_list)
+y_post = list(range(len(types)))
+plt.bar(y_pos, quantity)
+plt.ylabel('Quantity')
+plt.xlabel('User Type')
+plt.xticks(y_pos, types)
+plt.title('Quantity by User Type')
+plt.show(block=True)
+
 input("Press Enter to continue...")
 # TASK 8
 # TODO: Answer the following question
 male, female = count_gender(data_list)
 print("\nTASK 8: Why the following condition is False?")
 print("male + female == len(data_list):", male + female == len(data_list))
-answer = "Type your answer here."
+answer = "Since exist NaN(Empty values) in Genders of data_list, male + female size will be low than data_list."
 print("Answer:", answer)
 
 # ------------ DO NOT CHANGE ANY CODE HERE ------------
@@ -204,6 +230,62 @@ max_trip = 0.
 mean_trip = 0.
 median_trip = 0.
 
+
+def find_min(trip_duration_list):
+    min = 9999
+    for dl in trip_duration_list:
+        dl_as_int = int(dl)
+        if dl_as_int < int(min):
+            min = dl_as_int
+
+    return min
+
+
+def find_max(trip_duration_list):
+    max = 0
+    for dl in trip_duration_list:
+        dl_as_int = int(dl)
+        if dl_as_int > int(max):
+            max = dl_as_int
+
+    return max
+
+
+def find_mean(trip_duration_list):
+    count = 0
+    total = 0
+
+    for dl in trip_duration_list:
+        total += int(dl)
+        count += 1
+
+    return total / count
+
+
+def find_median(trip_duration_list):
+    trip_sorted_list = list(map(float, trip_duration_list))  # .sort()
+    trip_sorted_list.sort()
+
+    list_size = len(trip_sorted_list)
+    middle_index = list_size // 2
+
+    # if is odd, return the middle number
+    if list_size % 2 == 0:
+        return trip_sorted_list[middle_index]
+
+    # otherwise, calculate the mean between the middle numbers
+    else:
+        middle_value = trip_sorted_list[middle_index]
+        next_middle_value = trip_sorted_list[middle_index + 1]
+
+        return (middle_value + next_middle_value) // 2
+
+
+min_trip = find_min(trip_duration_list)
+max_trip = find_max(trip_duration_list)
+mean_trip = find_mean(trip_duration_list)
+median_trip = find_median(trip_duration_list)
+
 print("\nTASK 9: Printing the min, max, mean and median")
 print("Min: ", min_trip, "Max: ", max_trip, "Mean: ", mean_trip, "Median: ",
       median_trip)
@@ -219,7 +301,8 @@ input("Press Enter to continue...")
 # TASK 10
 # Gender is easy because usually only have a few options. How about start_stations? How many options does it have?
 # TODO: Check types how many start_stations do we have using set()
-user_types = set()
+start_station_list = column_to_list(data_list, 3)
+user_types = set(start_station_list)
 
 print("\nTASK 10: Printing start stations:")
 print(len(user_types))
