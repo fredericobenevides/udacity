@@ -320,7 +320,10 @@ def find_median(trip_duration_list):
     Returns:
         The median value of the trip
     """
-    trip_sorted_list = list(map(float, trip_duration_list))  # .sort()
+
+    # I was having the problem to sort without the map. After researching I
+    # found in slack that it needs to change the list to int before sorting.
+    trip_sorted_list = list(map(int, trip_duration_list))
     trip_sorted_list.sort()
 
     list_size = len(trip_sorted_list)
@@ -330,7 +333,7 @@ def find_median(trip_duration_list):
     if list_size % 2 == 0:
         return trip_sorted_list[middle_index]
 
-    # otherwise, calculate the mean between the middle numbers
+    # It's even. Let's caclculate the mean between the middle numbers
     else:
         middle_value = trip_sorted_list[middle_index]
         next_middle_value = trip_sorted_list[middle_index + 1]
@@ -404,6 +407,7 @@ def count_items(column_list):
 
     dict_items = {}
 
+    # create the dictionary to contain keys with total of values
     for i in column_list:
         item = dict_items.get(i)
         if item is None:
@@ -411,6 +415,7 @@ def count_items(column_list):
         else:
             dict_items[i] += 1
 
+    # loop to add to item_types and count_items
     for key, value in dict_items.items():
         item_types.append(key)
         count_items.append(value)
