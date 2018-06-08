@@ -42,8 +42,8 @@ input("Press Enter to continue...")
 # TODO: Print the `gender` of the first 20 rows
 
 print("\nTASK 2: Printing the genders of the first 20 samples")
-for i in range(20):
-    print(data_list[i][6])
+for index in range(20):
+    print(data_list[index][6])
 
 # Cool! We can get the rows(samples) iterating with a for and the columns(features) by index.
 # But it's still hard to get a column in a list. Example: List with all genders
@@ -65,8 +65,8 @@ def column_to_list(data, index):
     """
     column_list = []
     # Tip: You can use a for to iterate over the samples, get the feature by index and append into a list
-    for d in data:
-        column_list.append(d[index])
+    for row in data:
+        column_list.append(row[index])
     return column_list
 
 
@@ -92,10 +92,10 @@ male = 0
 female = 0
 
 list_genders = column_to_list(data_list, -2)
-for g in list_genders:
-    if g == 'Male':
+for gender in list_genders:
+    if gender == 'Male':
         male += 1
-    elif g == 'Female':
+    elif gender == 'Female':
         female += 1
 
 # Checking the result
@@ -126,10 +126,10 @@ def count_gender(data_list):
     female = 0
 
     list_genders = column_to_list(data_list, -2)
-    for g in list_genders:
-        if g == 'Male':
+    for gender in list_genders:
+        if gender == 'Male':
             male += 1
-        elif g == 'Female':
+        elif gender == 'Female':
             female += 1
 
     return [male, female]
@@ -216,8 +216,8 @@ def count_user_types(data_list):
     subscriber = 0
     customer = 0
 
-    for ut in list_user_types:
-        if ut == 'Subscriber':
+    for user_type in list_user_types:
+        if user_type == 'Subscriber':
             subscriber += 1
         else:
             customer += 1
@@ -269,10 +269,10 @@ def find_min(trip_duration_list):
         The minimum value of the trip
     """
     min = 9999
-    for dl in trip_duration_list:
-        dl_as_int = int(dl)
-        if dl_as_int < int(min):
-            min = dl_as_int
+    for trip_duration in trip_duration_list:
+        trip_duration_as_int = int(trip_duration)
+        if trip_duration_as_int < int(min):
+            min = trip_duration_as_int
 
     return min
 
@@ -286,10 +286,10 @@ def find_max(trip_duration_list):
         The maximum value of the trip
     """
     max = 0
-    for dl in trip_duration_list:
-        dl_as_int = int(dl)
-        if dl_as_int > int(max):
-            max = dl_as_int
+    for trip_duration in trip_duration_list:
+        trip_duration_as_int = int(trip_duration)
+        if trip_duration_as_int > int(max):
+            max = trip_duration_as_int
 
     return max
 
@@ -305,8 +305,8 @@ def find_mean(trip_duration_list):
     count = 0
     total = 0
 
-    for dl in trip_duration_list:
-        total += int(dl)
+    for trip_duration in trip_duration_list:
+        total += int(trip_duration)
         count += 1
 
     return total / count
@@ -408,17 +408,16 @@ def count_items(column_list):
     dict_items = {}
 
     # create the dictionary to contain keys with total of values
-    for i in column_list:
-        item = dict_items.get(i)
+    for index in column_list:
+        item = dict_items.get(index)
         if item is None:
-            dict_items[i] = 1
+            dict_items[index] = 1
         else:
-            dict_items[i] += 1
+            dict_items[index] += 1
 
-    # loop to add to item_types and count_items
-    for key, value in dict_items.items():
-        item_types.append(key)
-        count_items.append(value)
+    # add the keys and values to the right list
+    item_types = list(dict_items.keys())
+    count_items = list(dict_items.values())
 
     return item_types, count_items
 
