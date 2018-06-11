@@ -28,8 +28,8 @@ input("Press Enter to continue...")
 # TASK 1
 # TODO: Print the first 20 rows using a loop to identify the data.
 print("\n\nTASK 1: Printing the first 20 samples")
-for i in range(1, 21):
-    print(data_list[i])
+for index in range(1, 21):
+    print(data_list[index])
 
 # Let's change the data_list to remove the header from it.
 data_list = data_list[1:]
